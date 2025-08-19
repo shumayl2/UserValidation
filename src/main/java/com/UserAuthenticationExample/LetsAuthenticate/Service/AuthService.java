@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -26,6 +27,8 @@ public class AuthService {
 
 
     private final UserRepo userRepo;
+
+    private final PasswordEncoder passwordEncoder;
 
     public LoginResponseDto login(LoginRequestDto loginRequestdto) {
 
@@ -55,7 +58,7 @@ public class AuthService {
         users = userRepo.save(Users.builder()
                         .uid(UUID.randomUUID().toString())
                 .username(signUpRequestDto.getUsername())
-                        .password(signUpRequestDto.getPassword())
+                        .password(passwordEncoder.encode(signUpRequestDto.getPassword()))
                 .build());
 
         return new SignUpResponseDto(users.getUid(),users.getUsername());
