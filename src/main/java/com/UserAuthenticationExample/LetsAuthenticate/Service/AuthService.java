@@ -34,7 +34,7 @@ public class AuthService {
 
         //when we first login then we first need to get validated
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequestdto.getUsername(),loginRequestdto.getPassword()));
+                    new UsernamePasswordAuthenticationToken(loginRequestdto.getUsername(),loginRequestdto.getPassword()));
 
 
 
