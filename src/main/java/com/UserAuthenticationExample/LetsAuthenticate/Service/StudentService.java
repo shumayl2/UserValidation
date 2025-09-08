@@ -4,23 +4,29 @@ package com.UserAuthenticationExample.LetsAuthenticate.Service;
 import com.UserAuthenticationExample.LetsAuthenticate.Entity.Students;
 import com.UserAuthenticationExample.LetsAuthenticate.Repository.StudentRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
+
 public class StudentService {
 
-    private final StudentRepo studentRepo;
+    @Autowired
+    private StudentRepo studentRepo;
 
     public List<Students> getAllUser(){
         return studentRepo.findAll();
     }
 
     public void save(Students students){
+        students.setSid(UUID.randomUUID().toString());
         studentRepo.save(students);
+
     }
+
 
 
     public Students findById(String id){

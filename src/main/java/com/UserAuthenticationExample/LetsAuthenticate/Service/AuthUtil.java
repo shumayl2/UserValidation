@@ -38,11 +38,11 @@ public class AuthUtil {
 
     public String getUsernameFromToken(String token) {
         try {
-            Claims claims = Jwts.parserBuilder() // Use parserBuilder() for JJWT 0.11.5
-                    .setSigningKey(getsecretKey()) // Use setSigningKey instead of verifyWith for compatibility
+            Claims claims = Jwts.parser()
+                    .verifyWith(getsecretKey())
                     .build()
-                    .parseClaimsJws(token)
-                    .getBody();
+                    .parseSignedClaims(token)
+                    .getPayload();
             return claims.getSubject();
         } catch (JwtException e) {
             // Handle invalid or expired token

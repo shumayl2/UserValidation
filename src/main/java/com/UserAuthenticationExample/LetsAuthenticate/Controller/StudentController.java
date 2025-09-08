@@ -6,6 +6,7 @@ import com.UserAuthenticationExample.LetsAuthenticate.Error.ApiError;
 import com.UserAuthenticationExample.LetsAuthenticate.Repository.StudentRepo;
 import com.UserAuthenticationExample.LetsAuthenticate.Service.StudentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +15,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/student")
-@RequiredArgsConstructor
 public class StudentController {
 
+    @Autowired
     private StudentService studentService;
 
     @GetMapping("/id/{id}")
@@ -30,6 +31,7 @@ public class StudentController {
     @GetMapping
     public ResponseEntity<List<Students>> findAll(){
         List<Students> allUser = studentService.getAllUser();
+
 
         return new ResponseEntity<>(allUser,HttpStatus.OK);
     }

@@ -36,6 +36,9 @@ public class AuthService {
         Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequestdto.getUsername(),loginRequestdto.getPassword()));
 
+        //bhai yaha hum ek her baar ek naya object pass ker rahie hai jissei humei authentoicate kernawana hai
+        //new keyword use ker jkei her baar ek user ka naya object create hota hai yei toh humei pata hi hai 
+
 
 
        Users users = (Users)authentication.getPrincipal();
